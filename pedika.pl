@@ -5,7 +5,6 @@ use strict;
 use PostScript::Convert;
 use Imager;
 use PDF::API2::Lite;
-#use File::Copy qw(move);
 use File::Path qw(make_path);
 use Getopt::Long;
 
@@ -61,6 +60,12 @@ print "merge...\n";
 creatpdf (@fl);
 print "done...\n";
 
+
+
+#-------------------------------------------------------#
+#                       Functions                       #
+#-------------------------------------------------------#
+
 sub imagecrop
 {
 	my $fullname = shift;
@@ -97,9 +102,8 @@ sub creatpdf
 	foreach my $pic (sort {$a cmp $b} @pic)
 	{
 		my $image = $pdf->image_png( $pic );
-    	$pdf->page( $image->width, $image->height );
-    	$pdf->image( $image, 0, 0 );
+    		$pdf->page( $image->width, $image->height );
+    		$pdf->image( $image, 0, 0 );
 	}
-
 	$pdf->saveas( $opts{pdftarget} );
 }
