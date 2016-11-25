@@ -39,7 +39,7 @@ my $filename = "$opts{pdfsource}";
 my $output = "/tmp/pdima/$unicpath/images/pdima-%04d.png";
 
 print "preparing pages...\n";
-psconvert($filename, $output, format => 'png', resolution => '50');#, resolution => '300'); sort { $a cmp $b }
+psconvert($filename, $output, format => 'png', resolution => "$opts{resolution}");#, resolution => '300'); sort { $a cmp $b }
 
 my @fd=glob("/tmp/pdima/$unicpath/images/*.png");
 
