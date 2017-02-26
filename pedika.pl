@@ -22,12 +22,12 @@ GetOptions(
 	 "help|h",
   );
 
-die if (!defined $opts{pdfsource} or ! $opts{pdfsource} =~ /.*(.pdf)$/);
+die "need a pdf file" if (!defined $opts{pdfsource} or ! $opts{pdfsource} =~ /.*(.pdf)$/);
 
 if (!defined $opts{pdftarget})
 {
 	$opts{pdftarget} = $opts{pdfsource};
-	$opts{pdftarget} =~ s:(.*/)?(.*)(.pdf)$:$2-pdima.pdf:;
+	$opts{pdftarget} =~ s:(.*/)?(.*)(.pdf)$:$2-pedika.pdf:;
 }
 
 $opts{resolution} = '150' if (!defined $opts{resolution})
