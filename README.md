@@ -1,12 +1,12 @@
 
 
-### dependencies
+## dependencies
 libpng 16
 zlib1g
 ghost script
 
 
-### install dependencies
+## install dependencies
 
 ```
 sudo apt-get install libpng-dev
@@ -14,6 +14,15 @@ sudo apt-get install libpng-dev
 
 ```
 sudo apt-get install zlib1g-dev
+```
+
+## install
+بعد از دانلود کردن این مخزن:  
+
+```
+perl Makefile.PL
+make
+make install
 ```
 
 پدیکا یک اسکریپت برای تقسیم کردن کردن صفحه‌های فایل های پی دی اف به چند قسمت و صفحه بندی مجدد آن‌هاست.

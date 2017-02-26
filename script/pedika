@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+our $VERSION = '0.6';
 
 use warnings;
 use strict;
@@ -7,7 +8,11 @@ use Imager;
 use PDF::API2::Lite;
 use File::Path qw(make_path);
 use Getopt::Long;
+use File::Temp;
+use File::Spec;
+use File::Spec::Functions;
 
+my $temp_dir = File::Temp->newdir();
 
 my %opts = (
 	    direction => 'rtl'
@@ -30,17 +35,18 @@ if (!defined $opts{pdftarget})
 	$opts{pdftarget} =~ s:(.*/)?(.*)(.pdf)$:$2-pedika.pdf:;
 }
 
-$opts{resolution} = '150' if (!defined $opts{resolution})
+$opts{resolution} = '150' if (!defined $opts{resolution});
 
-my $unicpath = time();
-make_path "/tmp/pdima/$unicpath/images/pages/";
+
+make_path catdir($temp_dir,'pdima','images','pages');
 my $filename = "$opts{pdfsource}";
-my $output = "/tmp/pdima/$unicpath/images/pdima-%04d.png";
+my $output = catfile($temp_dir,'pdima','images',"pdima-%04d.png");
 
 print "preparing pages...\n";
 psconvert($filename, $output, format => 'png', resolution => "$opts{resolution}");#, resolution => '300'); sort { $a cmp $b }
 
-my @fd=glob("/tmp/pdima/$unicpath/images/*.png");
+my $glob = catfile($temp_dir,'pdima','images', '*.png');
+my @fd=glob ($glob);
 
 print "crop pages...\n";
 
@@ -55,7 +61,8 @@ foreach my $x (@fd)
 	}
 }
 
-my @fl=glob("/tmp/pdima/$unicpath/images/pages/*");
+$glob = catfile($temp_dir,'pdima','images', 'pages','*');
+my @fl=glob ($glob);
 print "merge...\n";
 creatpdf (@fl);
 print "done...\n";
@@ -89,8 +96,8 @@ sub imagecrop
 		$ln='1';
 	}
 
-	my $leftname = "/tmp/pdima/$unicpath/images/pages/$name-$ln.png";
-	my $rightname = "/tmp/pdima/$unicpath/images/pages/$name-$rn.png";
+	my $leftname = catfile($temp_dir,'pdima','images', 'pages', "$name-$ln.png");
+	my $rightname = catfile($temp_dir,'pdima','images', 'pages', "$name-$rn.png");
 	$lefthalf->write(file=>$leftname) or die $lefthalf->errstr;
 	$righthalf->write(file=>$rightname) or die $righthalf->errstr;
 }
