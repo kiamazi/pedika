@@ -11,7 +11,7 @@ WriteMakefile
 (
   NAME             => 'pedika',
   AUTHOR           => 'Kiavash',
-  VERSION_FROM     => 'script/pedika.pl',
+  VERSION_FROM     => 'script/pedika',
   ABSTRACT         => 'pdf cutter',
   LICENSE          => 'gpl_3',
   EXE_FILES        => [

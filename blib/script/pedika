@@ -1,0 +1,116 @@
+#!/home/kiavash/perl5/perlbrew/perls/perl-5.24.1/bin/perl
+our $VERSION = '0.6';
+
+use warnings;
+use strict;
+use PostScript::Convert;
+use Imager;
+use PDF::API2::Lite;
+use File::Path qw(make_path);
+use Getopt::Long;
+use File::Temp;
+use File::Spec;
+use File::Spec::Functions;
+
+my $temp_dir = File::Temp->newdir();
+
+my %opts = (
+	    direction => 'rtl'
+	   );
+
+GetOptions(
+   \%opts,
+	 "pdfsource|pdf=s",
+	 "pdftarget|save=s",
+	 "direction|dir=s",
+	 "resolution|dpi=s",
+	 "help|h",
+  );
+
+die "need a pdf file" if (!defined $opts{pdfsource} or ! $opts{pdfsource} =~ /.*(.pdf)$/);
+
+if (!defined $opts{pdftarget})
+{
+	$opts{pdftarget} = $opts{pdfsource};
+	$opts{pdftarget} =~ s:(.*/)?(.*)(.pdf)$:$2-pedika.pdf:;
+}
+
+$opts{resolution} = '150' if (!defined $opts{resolution});
+
+
+make_path catdir($temp_dir,'pdima','images','pages');
+my $filename = "$opts{pdfsource}";
+my $output = catfile($temp_dir,'pdima','images',"pdima-%04d.png");
+
+print "preparing pages...\n";
+psconvert($filename, $output, format => 'png', resolution => "$opts{resolution}");#, resolution => '300'); sort { $a cmp $b }
+
+my $glob = catfile($temp_dir,'pdima','images', '*.png');
+my @fd=glob ($glob);
+
+print "crop pages...\n";
+
+foreach my $x (@fd)
+{
+	if ($x =~ /(.*)(.png)$/)
+	{
+		my $z1 = $1;
+		my $z2 = $2;
+		my $name = $x;
+		imagecrop ($name, $z1);
+	}
+}
+
+$glob = catfile($temp_dir,'pdima','images', 'pages','*');
+my @fl=glob ($glob);
+print "merge...\n";
+creatpdf (@fl);
+print "done...\n";
+
+
+
+#-------------------------------------------------------#
+#                       Functions                       #
+#-------------------------------------------------------#
+
+sub imagecrop
+{
+	my $fullname = shift;
+	my $name = shift;
+	$name =~ s:.*/(.*)$:$1:;
+	my $image = Imager->new;
+	$image->read(file => $fullname) or die $image->errstr;
+	my $lefthalf = $image->crop(right=>$image->getwidth() / 2);
+	my $righthalf = $image->crop(left=>$image->getwidth() / 2, right=>$image->getwidth() );
+
+
+		my $rn;
+		my $ln;
+	if ($opts{direction} eq 'rtl')
+	{
+		$rn='1';
+		$ln='2';
+	} else
+	{
+		$rn='2';
+		$ln='1';
+	}
+
+	my $leftname = catfile($temp_dir,'pdima','images', 'pages', "$name-$ln.png");
+	my $rightname = catfile($temp_dir,'pdima','images', 'pages', "$name-$rn.png");
+	$lefthalf->write(file=>$leftname) or die $lefthalf->errstr;
+	$righthalf->write(file=>$rightname) or die $righthalf->errstr;
+}
+
+sub creatpdf
+{
+	my $pdf = PDF::API2::Lite->new;
+	my @pic = @_;
+	foreach my $pic (sort {$a cmp $b} @pic)
+	{
+		my $image = $pdf->image_png( $pic );
+    		$pdf->page( $image->width, $image->height );
+    		$pdf->image( $image, 0, 0 );
+	}
+	$pdf->saveas( $opts{pdftarget} );
+}
