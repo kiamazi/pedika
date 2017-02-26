@@ -5,9 +5,6 @@ use utf8;
 use 5.012;
 
 use ExtUtils::MakeMaker;
-use File::ShareDir::Install;
-
-install_share dist => 'share';
 
 
 WriteMakefile
@@ -25,14 +22,14 @@ WriteMakefile
         'ExtUtils::MakeMaker'       => 0,
   },
   PREREQ_PM => {
-	`PostScript::Convert` 	=> 0,
-	`Imager` 		=> 0,
-	`PDF::API2::Lite`	=> 0,
-	`File::Path`		=> 0,
-	`Getopt::Long` 		=> 0,
-	`File::Temp` 		=> 0,
-	`File::Spec` 		=> 0,
-	`File::Spec::Functions` => 0,
+	'PostScript::Convert' 	=> 0,
+	'Imager' 		=> 0,
+	'PDF::API2::Lite'	=> 0,
+	'File::Path'		=> 0,
+	'Getopt::Long' 		=> 0,
+	'File::Temp' 		=> 0,
+	'File::Spec' 		=> 0,
+	'File::Spec::Functions' => 0,
 },
   dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
   META_MERGE => {
