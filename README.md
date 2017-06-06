@@ -69,7 +69,12 @@ pedika -pdf source/file.pdf -save target/file/name.pdf -dpi 150 -dir rtl
 
 <div dir="ltr">-save:</div>  
 در صورتی که نام فایل جدیدی که میخواهیدرا وارد نکنید، نام فایل جدید برابر نام فایل قبل با اندیس پدیکا خواهد بود  
+
+<div dir="ltr">
+
 > target file name = source/file-pedika.pdf
+
+</div>
 
 <div dir="ltr">-dpi:</div>  
 اگر رزولیشین را مشخص نکنید، مقدار ۱۵۰ به عنوان پیش فرض انتخاب میشود.  
