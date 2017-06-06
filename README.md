@@ -18,7 +18,7 @@ sudo apt-get install zlib1g-dev
 
 ## install
 
-<div direction="rtl">
+<div dir="rtl">
 
 بعد از دانلود کردن یا clone کردن این مخزن:  
 
