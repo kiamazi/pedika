@@ -1,0 +1,7 @@
+LICENSE.md
+Makefile.PL
+MANIFEST			This list of files
+META.yml
+META.json
+README.md
+script/pedika
