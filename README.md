@@ -17,7 +17,9 @@ sudo apt-get install zlib1g-dev
 ```
 
 ## install
-<div direction="rtl" text-align="right">
+
+<div direction="rtl">
+
 بعد از دانلود کردن یا clone کردن این مخزن:  
 
 ```
@@ -66,4 +68,5 @@ pedika -pdf source/file.pdf -save target/file/name.pdf -dpi 150 -dir rtl
 مقادیر مجاز:  
  - rtl راست به چپ  
  - ltr چب به راست  
+
 </div>
