@@ -8,11 +8,8 @@ ghost script
 
 ## install dependencies
 
-```
+``` bash
 sudo apt-get install libpng-dev
-```
-
-```
 sudo apt-get install zlib1g-dev
 ```
 
@@ -22,11 +19,15 @@ sudo apt-get install zlib1g-dev
 
 بعد از دانلود کردن یا clone کردن این مخزن:  
 
+<div dir="ltr">
+
 ```
 perl Makefile.PL
 make
 make install
 ```
+
+</div>
 
 پدیکا یک اسکریپت برای تقسیم کردن کردن صفحه‌های فایل های پی دی اف به چند قسمت و صفحه بندی مجدد آن‌هاست.
 
@@ -47,26 +48,34 @@ make install
 
 ### نحوه استفاده
 
+<div dir="ltr">
+
 ```
 pedika -pdf source/file.pdf -save target/file/name.pdf -dpi 150 -dir rtl
 ```
 
--pdf:  
+</div>
+
+<div dir="ltr">-pdf:</div>  
 تنها سوییچ اجباری است که با آن آدرس و نام فایلی که میخواهید تقسیم شود را مشخص میکنید
 
--save:  
+<div dir="ltr">-save:</div>  
 در صورتی که نام فایل جدیدی که میخواهیدرا وارد نکنید، نام فایل جدید برابر نام فایل قبل با اندیس پدیکا خواهد بود  
 > target file name = source/file-pedika.pdf
 
--dpi:  
+<div dir="ltr">-dpi:</div>  
 اگر رزولیشین را مشخص نکنید، مقدار ۱۵۰ به عنوان پیش فرض انتخاب میشود.  
 هر چه عدد بزرگتری مشخص کنید، کیفیت بیشتری به دست میآید، اما سرعت انجام کار کمتر خواهد شد.
 
--dir:  
+<div dir="ltr">-dir:</div>  
 مشخص کنندهی اینکه صفحات از راست به چپ چیده شده اند یا از چپ به راست.  
 اگر مقداری به آن داده نشود، صفحات راست به چپ در نظر گرفته میشوند.  
-مقادیر مجاز:  
+مقادیر مجاز:
+<div dir="ltr">
+  
  - rtl راست به چپ  
- - ltr چب به راست  
+ - ltr چب به راست
+ 
+ </div>  
 
 </div>
