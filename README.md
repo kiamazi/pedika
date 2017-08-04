@@ -1,3 +1,6 @@
+<div dir="rtl">
+پدیکا یک اسکریپت برای تقسیم کردن کردن صفحه‌های فایل های پی دی اف به چند قسمت و صفحه بندی مجدد آن‌هاست
+</div>
 
 
 ## dependencies
@@ -7,11 +10,18 @@ ghost script
 
 
 ## install dependencies
-
+### debian bases
 ``` bash
-sudo apt-get install libpng-dev
-sudo apt-get install zlib1g-dev
+sudo apt install libpng-dev
+sudo apt install zlib1g-dev
 ```
+### mac
+``` bash
+brew install libpng
+xcode-select --install
+brew install zlib
+```
+
 
 ## install
 
@@ -27,9 +37,13 @@ make
 make install
 ```
 
-</div>
+یا
 
-پدیکا یک اسکریپت برای تقسیم کردن کردن صفحه‌های فایل های پی دی اف به چند قسمت و صفحه بندی مجدد آن‌هاست.
+```
+cpanm https://github.com/kiamazi/pedika.git
+```
+
+</div>
 
 ### کاربرد
 حتما پیش آمده با فایل‌های پی دی اف‌ اسکن شده از روی کتاب‌ها مواجه شده باشید که در هر صفحه از فایل پی دی اف، دو صفحه کتاب به صورت عرضی وجود داشته باشد.  
@@ -81,14 +95,14 @@ pedika -pdf source/file.pdf -save target/file/name.pdf -dpi 150 -dir rtl
 هر چه عدد بزرگتری مشخص کنید، کیفیت بیشتری به دست میآید، اما سرعت انجام کار کمتر خواهد شد.
 
 <div dir="ltr">-dir:</div>  
-مشخص کنندهی اینکه صفحات از راست به چپ چیده شده اند یا از چپ به راست.  
+مشخص کننده‌ی اینکه صفحات از راست به چپ چیده شده اند یا از چپ به راست.  
 اگر مقداری به آن داده نشود، صفحات راست به چپ در نظر گرفته میشوند.  
 مقادیر مجاز:
 <div dir="ltr">
-  
+
  - rtl راست به چپ  
  - ltr چب به راست
- 
+
  </div>  
 
 </div>
