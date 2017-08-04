@@ -52,6 +52,8 @@ cpanm https://github.com/kiamazi/pedika.git
 
 ┌─┬─┐  
 │2│1│  
+├4│3┤  
+├6│5┤  
 └─┴─┘  
 
 </div>
@@ -64,6 +66,14 @@ cpanm https://github.com/kiamazi/pedika.git
 │1│  
 ├─┤  
 │2│  
+├─┤  
+│3│  
+├─┤  
+│4│  
+├─┤  
+│5│  
+├─┤  
+│6│  
 └─┘  
 
 </div>
